@@ -1,6 +1,19 @@
 import TestGUI as tg
-import time
+from threading import Thread
+from time import sleep
 
-time.sleep(3)
-tg.slouching(1)
-tg.slouching(0)
+isSlouching = 0
+
+def slouching():
+    while True:
+        tg.slouching(isSlouching)
+
+if __name__ == "__main__":
+    thread = Thread(target = slouching, args = ())
+    print("setting slouching to 1")
+    thread.start()
+    sleep(5)
+    isSlouching = 1
+    print("DONE_SLOUCHING")
+    thread.join()
+    print "thread finished...exiting"
